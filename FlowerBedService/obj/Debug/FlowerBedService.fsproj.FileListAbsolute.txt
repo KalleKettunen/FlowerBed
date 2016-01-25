@@ -1,0 +1,10 @@
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FlowerBedService.dll.config
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FlowerBedService.XML
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FlowerBedService.dll
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FlowerBedService.pdb
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FSharp.Core.dll
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FSharp.Data.SqlProvider.dll
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FSharp.Data.SqlProvider.pdb
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\bin\Debug\FSharp.Core.xml
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\obj\Debug\FlowerBedService.dll
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\FlowerBedService\obj\Debug\FlowerBedService.pdb

@@ -1,0 +1,14 @@
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\Test.exe.config
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\Test.XML
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\Test.exe
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\Test.pdb
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\DataService.dll
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\FSharp.Core.dll
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\FSharp.Data.SqlProvider.dll
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\DataService.pdb
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\DataService.xml
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\FSharp.Data.SqlProvider.pdb
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\bin\Release\FSharp.Core.xml
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\obj\Release\Test.fsprojResolveAssemblyReference.cache
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\obj\Release\Test.exe
+C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\Test\obj\Release\Test.pdb

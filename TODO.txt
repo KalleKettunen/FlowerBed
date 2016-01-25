@@ -1,0 +1,14 @@
+dataprovider
+	alueista palautetaan oma listansa yhden sijaan.
+	x kasvin lis‰‰minen tietokantaan.
+
+ui
+	x kasvien reagointi p‰iv‰m‰‰r‰‰n
+	x kasvin lis‰‰minen tietokantaan.
+	 kukkien hallinta dialogi
+	 x	lis‰ys
+		editointi
+		x	kukinta alku p‰iv‰m‰‰r‰ roomalaisilla kirjaimilla
+		x	kukinta loppu p‰iv‰m‰‰r‰ roomalaisilla kirjaimilla
+data
+	 x kukinta alku ja loppu
