@@ -1,5 +1,0 @@
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\TEmp\bin\Debug\TEmp.dll
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\TEmp\bin\Debug\TEmp.pdb
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\TEmp\obj\Debug\TEmp.csprojResolveAssemblyReference.cache
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\TEmp\obj\Debug\TEmp.dll
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\TEmp\obj\Debug\TEmp.pdb

@@ -1,6 +1,0 @@
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\testc\bin\Debug\testc.exe.config
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\testc\bin\Debug\testc.exe
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\testc\bin\Debug\testc.pdb
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\testc\obj\Debug\testc.csprojResolveAssemblyReference.cache
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\testc\obj\Debug\testc.exe
-C:\Users\Kalle\documents\visual studio 2013\Projects\FlowerBed\testc\obj\Debug\testc.pdb
