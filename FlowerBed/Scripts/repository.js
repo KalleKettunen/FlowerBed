@@ -63,7 +63,9 @@ function repository(callback) {
         },
         addPlant: function (plant) {
             plant.id = _objectid++;
-            plant.Name = function () { return this.flower.name + " " + this.id; };
+            plant.Name = function() {
+                 return plant.flower.name + " " + this.id;
+            };
             _planting.plants.push(plant);
         },
 
@@ -85,6 +87,29 @@ function repository(callback) {
             },
             getPlantings :function(callBack) {
                 $.get('api/Planting/', callBack);
+            },
+            savePlanting: function(planting) {
+                var p = repo.Planting();
+                var d = JSON.stringify({
+                    Id: p.id,
+                    Name: p.name,
+                    Owner: p.owner,
+                    Plants: p.plants.map(function(plant) {
+                        return {
+                            Flower: plant.flower.id,
+                            Pos: {
+                                X: plant.pos.x,
+                                Y: plant.pos.y
+                            }
+                        };
+                    }),
+                    Area: p.area
+                })
+                $.ajax({url: 'api/Planting/Save', 
+                    data: d,
+                    dataType: "json",
+                    contentType: "application/json",
+                    type : "POST"});
             }
         }
 

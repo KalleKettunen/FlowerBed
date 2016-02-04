@@ -11,7 +11,9 @@
                 canvas.update();
             });
         },
-        save: function () { },
+        save: function() {
+            return repository.db.savePlanting();
+        },
         create: function() {
             
 
@@ -28,7 +30,9 @@
     $(data.load).click(function() {
         planting.load($(data.select).val());
     });
-
+    $(data.save).click(function() {
+        planting.save();
+    })
     $(data.dialog).dialog();
 
     function processPlanting(planting) {

@@ -10,29 +10,33 @@ open FSharp.Data.Sql.Providers
 open Microsoft.FSharp.Collections
 open NpgsqlTypes
 
-type sql = SqlDataProvider<
-                ConnectionString = @"Server=kalletest.cloudapp.net;Port=54321;Database=FlowerBed;User Id=postgres;Password=!n<<uP!n<<u",
-                DatabaseVendor = Common.DatabaseProviderTypes.POSTGRESQL, 
-                ResolutionPath = @"D:\home\site\wwwroot\bin\">
-
 //type sql = SqlDataProvider<
-//                ConnectionString = @"Server=localhost;Port=5432;Database=FlowerBed;User Id=kalle;Password=1n<<uP1n<<u",
+//                ConnectionString = @"Server=kalletest.cloudapp.net;Port=54321;Database=FlowerBed;User Id=postgres;Password=0iv4P0ika",
 //                DatabaseVendor = Common.DatabaseProviderTypes.POSTGRESQL, 
 //                ResolutionPath = @"D:\home\site\wwwroot\bin\">
+                
+type sql = SqlDataProvider<
+                ConnectionString = @"Server=localhost;Port=5432;Database=FlowerBed;User Id=kalle;Password=1n<<uP1n<<u",
+                DatabaseVendor = Common.DatabaseProviderTypes.POSTGRESQL, 
+                ResolutionPath = @"D:\home\site\wwwroot\bin\">
 
 [<CLIMutable>]
 // tyyppi kasville
 type Flower = {    ID: int; Name : string;    Color : string; Width : decimal; Height : decimal; StartDate :int; EndDate :int}
 
+[<CLIMutable>]
 // tyyppi pisteelle
 type SPoint = {    X : float32;    Y : float32}
 
+[<CLIMutable>]
 // tyyppi kasvimaassa olevalle kasville
 type SPlant = {    Flower : int;    Pos : SPoint}
 
+[<CLIMutable>]
 // kasvimaan rajat listana pisteitä.
 type SPolygon = {   Points : SPoint list}
 
+[<CLIMutable>]
 // tyyppi kasvimaalle
 type Planting = {Id :int;Name :string; Owner :string; Plants: SPlant list; Area : SPolygon list}
 
@@ -72,16 +76,33 @@ module sqlTest =
                                                     Area = d.Select (fun (f, g) ->{ Points = f.Select(fun h -> {X = h.X; Y = h.Y}) |> Seq.toList}) |> Seq.toList}) |> Seq.exactlyOne
     
     // päivittää kukkapenkin muutokset kantaan poistamalla ensin kaikki kukkapenkin tiedot ja tallentamalla sen jälkeen muuttuneet tiedot kantaan
-    let update_planting id =
-        let x = [id].FirstOrDefault()
+    let update_planting (planting : Planting) =
         let con = PostgreSQL.createConnection ctx.Functions.ConnectionString
         con.Open()
-        let query = sprintf @"DELETE FROM PLANT WHERE PLANTINGID = %i; DELETE FROM PLANTINGAREA WHERE PLANTINGID = %i;" id id
+        let query = sprintf @"DELETE FROM PLANT WHERE PLANTINGID = %i; DELETE FROM PLANTINGAREA WHERE PLANTINGID = %i;" planting.Id planting.Id
         use command = PostgreSQL.createCommand query con 
         command.ExecuteNonQuery() |> ignore
         con.Close()
 
+        // luodaan kasveille avaimet niiden listanssa olevan järjestyksen mukaan ja viedään jokainen rivi kantaan
+        let plants = planting.Plants |> Seq.zip (seq {0 .. planting.Plants.Count()-1}) |> Seq.map(fun (n, p) ->
+            // Rivit joudutaan viemään kantaan ilman entity mallia koska framework ei oikeastaan tue Postgres kannan kaikkia tietotyyppejä.
+            con.Open()
+            let query = sprintf @"INSERT INTO PLANT (plantid, plantingid, flowerid, position) VALUES(%i,%i,%i,%s);" n planting.Id p.Flower (sprintf "'(%f,%f)'" p.Pos.X p.Pos.X)
+            use command = PostgreSQL.createCommand query con 
+            command.ExecuteNonQuery() |> ignore
+            con.Close()           
+            query    ) |> Seq.toList
+            
+            
+//        let area = planting.Area |> Seq.map( fun pa -> 
+//            let a = ctx.``[PUBLIC].[PLANTINGAREA]``.Create()
+//            a.AREA <- new NpgsqlPolygon(pa.Points.Select(fun p -> new NpgsqlPoint(p.X, p.Y)))) |> Seq.toList
+
+        ctx.SubmitUpdates()
+        
         //TODO: tietojen lisäys
+
         true
 
     // Hakee kaikki erillaiset kukkaset kukkatietokannasta

@@ -21,7 +21,8 @@ $(document).ready(function () {
                 "dialog": "#plantingController", 
                 "select":"#selectPlanting", 
                 "load": "#selectPlantingButton",
-                "name" : "#canvasName"
+                "name": "#canvasName",
+                "save": "#savePlanting"
             });
     });
     
