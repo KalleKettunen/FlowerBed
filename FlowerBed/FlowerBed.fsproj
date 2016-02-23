@@ -160,6 +160,9 @@
     <Content Include="Scripts\canvas.js" />
     <Content Include="Scripts\datecontroller.js" />
     <Content Include="Scripts\plantingcontroller.js" />
+    <Content Include="Scripts\edgecontroller.js" />
+    <Content Include="Scripts\workcontroller.js" />
+    <Content Include="Scripts\plantcontroller.js" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data.SqlProvider">

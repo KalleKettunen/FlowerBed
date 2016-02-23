@@ -16,6 +16,13 @@
         contextLayer.stroke();
     }
 
+    function drawEdge(edge) {
+        contextLayer.beginPath();
+        contextLayer.moveTo(zoom.scale(edge.start.x), zoom.scale(edge.start.y));
+        contextLayer.lineTo(zoom.scale(edge.end.x), zoom.scale(edge.end.y));
+        contextLayer.stroke();
+    }
+
     function drawFlower(plant) {
         contextLayer.beginPath();
         contextLayer.arc(zoom.scale(plant.pos.x), zoom.scale(plant.pos.y), zoom.scale(plant.flower.width), 0, 2 * Math.PI);
@@ -47,7 +54,8 @@
     });
 
     return {
-        update : update,
+        update: update,
+        drawEdge : drawEdge,
         init : function(data) {
             content = data.planting;
             date = data.date;

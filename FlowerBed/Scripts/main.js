@@ -6,7 +6,11 @@
     zoom,
     canvas;
 
-$(document).ready(function () {
+$(document).ready(function() {
+    var addObjectControl = {
+        addObject: function(x, y) {
+        }
+    };
 
     main.repository = repository();
     main.zoom = zoomController({ "zoomIn": "#zoom_in", "zoomOut": "#zoom_out", "scale": "#scale" });
@@ -17,33 +21,41 @@ $(document).ready(function () {
         main.plantingController = plantingController(
             main.repository,
             main.canvas,
-            {
+            {  
                 "dialog": "#plantingController", 
                 "select":"#selectPlanting", 
                 "load": "#selectPlantingButton",
                 "name": "#canvasName",
                 "save": "#savePlanting"
             });
+            edgeController.data = {
+                "addLayer": "#add_layer",
+            };
+            plantController.data = {
+                "selectedFlower": "#selectFlower option:selected"
+            };
+        main.workController = workController(
+            {
+                "edge" : edgeController,
+                "plant": plantController
+            },
+            main.repository,
+            main.canvas,
+            {
+                "addLayer": "#add_layer",
+                "addFlower": "#add_flower",
+                "addArea": "#add_area",
+                "editArea": "#edit_area",
+                "deleteArea": "#delete_area"
+            }
+            );
     });
-    
+
     
     focusLayer = document.getElementById("layer2").getContext("2d");
 
     $(".canvas_holder").click(selectObject);
-    // Add layer click eventhandler.
-    $("#add_layer").click(function (event) {
-        var plant, flower;
-        $("#add_layer").zIndex(1).toggleClass("hidden");
-        event.stopPropagation();
-
-        flower = main.repository.findFlower($("#selectFlower option:selected").val());
-        plant = {
-            flower: flower,
-            pos: { x: event.offsetX, y: event.offsetY }
-        };
-        main.repository.addPlant(plant);
-        main.canvas.update();
-    });
+    
 
     $("#add_layer").mousemove(function(event) {
         $("#add_x").text(event.offsetX);
@@ -66,9 +78,17 @@ $(document).ready(function () {
     });
 
     // Control button handlers
-    $("#add_flower").click(function () {
-        $("#add_layer").zIndex(10).toggleClass("hidden");
-    });
+    //$("#add_flower").click(function () {
+    //    activateAddLayer();
+    //    addObjectControl.addObject = function(pos) {
+    //        var plant = {
+    //            flower: main.repository.findFlower($("#selectFlower option:selected").val()),
+    //            pos: pos
+    //        };
+    //        main.repository.addPlant(plant);
+    //        $("#add_layer").zIndex(1).toggleClass("hidden");
+    //    };
+    //});
 
     /*$.get("api/Planting/1",
         function (data) {

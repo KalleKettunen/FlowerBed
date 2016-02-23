@@ -1,14 +1,23 @@
 dataprovider
-	alueista palautetaan oma listansa yhden sijaan.
+	x alueista palautetaan oma listansa yhden sijaan.
 	x kasvin lis‰‰minen tietokantaan.
+	  kasvimaan tallentaminen tietokantaan
+		x kasvit
+		  rajat
 
 ui
 	x kasvien reagointi p‰iv‰m‰‰r‰‰n
 	x kasvin lis‰‰minen tietokantaan.
-	 kukkien hallinta dialogi
-	 x	lis‰ys
+	x kukkien hallinta dialogi
+	  x	lis‰ys
 		editointi
 		x	kukinta alku p‰iv‰m‰‰r‰ roomalaisilla kirjaimilla
 		x	kukinta loppu p‰iv‰m‰‰r‰ roomalaisilla kirjaimilla
+	rajojen piirt‰minen
+		uusien lis‰‰minen
+		vanhojen muokkaus
 data
 	 x kukinta alku ja loppu
+
+bugs
+	plants undefined in selectObject
