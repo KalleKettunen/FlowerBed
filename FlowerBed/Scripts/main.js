@@ -11,7 +11,7 @@ $(document).ready(function() {
         addObject: function(x, y) {
         }
     };
-
+    main.geometryService = geometryService();
     main.repository = repository();
     main.zoom = zoomController({ "zoomIn": "#zoom_in", "zoomOut": "#zoom_out", "scale": "#scale" });
     main.canvas = flowerCanvas(document.getElementById("flowerbed").getContext("2d"), main.zoom,  { "update": ["#zoom_in", "#zoom_out"] });
@@ -28,9 +28,10 @@ $(document).ready(function() {
                 "name": "#canvasName",
                 "save": "#savePlanting"
             });
-            edgeController.data = {
-                "addLayer": "#add_layer",
-            };
+        edgeController.data = {
+            "addLayer": "#add_layer",
+            "geometry": main.geometryService
+    };
             plantController.data = {
                 "selectedFlower": "#selectFlower option:selected"
             };
@@ -76,30 +77,6 @@ $(document).ready(function() {
         focusObject[0].flower.color = this.value;
         main.canvas.update();
     });
-
-    // Control button handlers
-    //$("#add_flower").click(function () {
-    //    activateAddLayer();
-    //    addObjectControl.addObject = function(pos) {
-    //        var plant = {
-    //            flower: main.repository.findFlower($("#selectFlower option:selected").val()),
-    //            pos: pos
-    //        };
-    //        main.repository.addPlant(plant);
-    //        $("#add_layer").zIndex(1).toggleClass("hidden");
-    //    };
-    //});
-
-    /*$.get("api/Planting/1",
-        function (data) {
-            main.repository.Planting(data);
-            processPlanting(data);
-            
-            main.canvas.update();
-        });
-        */
-    
-
 });
 
 function processPlanting(data) {
@@ -158,10 +135,4 @@ function createEdges(polygons) {
 function midPoint(p1, p2) {
     return { x: (p1.x + p2.x) / 2, y: (p1.y + p2.y) / 2 };
 }
-/*
-function updateContexLayer() {
-    contextLayer.clearRect(0, 0, 640, 480);
-    var data = main.repository.Planting()[0];
-    drawPolygon(data.area);
-    data.flowers.forEach(drawFlower);
-}*/
+

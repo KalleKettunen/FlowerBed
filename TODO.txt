@@ -16,6 +16,7 @@ ui
 	rajojen piirtäminen
 		uusien lisääminen
 		vanhojen muokkaus
+	geometriapalvelu
 data
 	 x kukinta alku ja loppu
 
