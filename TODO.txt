@@ -4,19 +4,32 @@ dataprovider
 	  kasvimaan tallentaminen tietokantaan
 		x kasvit
 		  rajat
+	 apufunktiot pisteen ja polygonin tallentamiseksi
 
 ui
 	x kasvien reagointi p‰iv‰m‰‰r‰‰n
 	x kasvin lis‰‰minen tietokantaan.
+	n‰yt‰ kasvin ulkorajat lis‰tt‰ess‰ sit‰ kasvimaalle.
 	x kukkien hallinta dialogi
 	  x	lis‰ys
 		editointi
 		x	kukinta alku p‰iv‰m‰‰r‰ roomalaisilla kirjaimilla
 		x	kukinta loppu p‰iv‰m‰‰r‰ roomalaisilla kirjaimilla
 	rajojen piirt‰minen
-		uusien lis‰‰minen
+		x uusien lis‰‰minen
 		vanhojen muokkaus
 	geometriapalvelu
+	
+	aloitus dialogi
+		mahdollista avata dialogi muutenkin.
+		load sulkee dialogin viestin kanssa.
+		
+	Canvas
+		x p‰ivit‰ myˆs alueet.
+		x poista path:n piirto valmiin alueen piirrosta.
+		x tyˆ jono asioiden piirt‰miseen.
+		x valitun kukan kaikki tiedot muistiin.
+
 data
 	 x kukinta alku ja loppu
 

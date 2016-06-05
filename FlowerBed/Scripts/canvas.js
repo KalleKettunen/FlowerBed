@@ -4,12 +4,12 @@
         zoom = zoomController,
         content = {},
         date,
-        _work = { };
+        _work = [];
 
     function drawPolygon(polygon) {
         if (polygon.points.length > 0) {
             var start = polygon.points[0];
-
+            contextLayer.beginPath();
             contextLayer.moveTo(zoom.scale(start.x), zoom.scale(start.y));
             polygon.points.slice(1).forEach(function(elem) {
                 contextLayer.lineTo(zoom.scale(elem.x), zoom.scale(elem.y));
@@ -22,7 +22,7 @@
     function drawPath(path) {
         if (path.length > 0) {
             var start = path[0];
-
+            contextLayer.beginPath();
             contextLayer.moveTo(zoom.scale(start.x), zoom.scale(start.y));
             path.slice(1).forEach(function (elem) {
                 contextLayer.lineTo(zoom.scale(elem.x), zoom.scale(elem.y));
@@ -66,10 +66,11 @@
             return a.flower.height - b.flower.height;
         }).forEach(drawFlower);
 
-        if (_work.path)
-            drawPath(_work.path);
-        if (_work.circle)
-            drawCircle(_work.circle);
+        _work.forEach(function(elem) {
+            elem.draw();
+        });
+
+        _work = [];
     }
 
     function flowerColor(flower) {
@@ -90,13 +91,20 @@
         update: update,
         drawEdge: drawEdge,
         drawPath: function (path) {
-            _work.path = path;
+            _work.push({"draw":function() {
+                drawPath(path);
+            }});
         },
-        drawCircle : function(point, radius, color) {
-            _work.circle = { "point": point, "radius": radius, "color": color };
+        drawCircle: function (point, radius, color) {
+            _work.push({
+                "draw": function() {
+                    drawCircle({ "point": point, "radius": radius, "color": color });
+                }
+            });
+
         },
-        removeCircle :function() {
-            _work.circle = null;
+        clearWork : function() {
+            _work = [];
         },
         init : function(data) {
             content = data.planting;

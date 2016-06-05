@@ -14,9 +14,11 @@
         save: function() {
             return repository.db.savePlanting();
         },
-        create: function() {
-            
-
+        create: function () {
+            var planting = { area: [], plants: [] };
+            repository.Planting(planting);
+            canvas.init({ "planting": planting, "date": main.date });
+            canvas.update();
         }
 
     };
@@ -30,10 +32,18 @@
     $(data.load).click(function() {
         planting.load($(data.select).val());
     });
+
     $(data.save).click(function() {
         planting.save();
-    })
-    $(data.dialog).dialog();
+    });
+
+    $(data.create).click(function() {
+        planting.create();
+    });
+
+    $(data.open).click(function() {
+        $(data.dialog).dialog();
+    });
 
     function processPlanting(planting) {
         $(data.name).text(planting.name);

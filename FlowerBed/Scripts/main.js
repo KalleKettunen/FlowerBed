@@ -7,10 +7,7 @@
     canvas;
 
 $(document).ready(function() {
-    var addObjectControl = {
-        addObject: function(x, y) {
-        }
-    };
+
     main.geometryService = geometryService();
     main.repository = repository();
     main.zoom = zoomController({ "zoomIn": "#zoom_in", "zoomOut": "#zoom_out", "scale": "#scale" });
@@ -26,7 +23,9 @@ $(document).ready(function() {
                 "select":"#selectPlanting", 
                 "load": "#selectPlantingButton",
                 "name": "#canvasName",
-                "save": "#savePlanting"
+                "save": "#savePlanting",
+                "open": "#openPlantingController",
+                "create": "#createPlanting"
             });
         edgeController.data = {
             "addLayer": "#add_layer",
@@ -95,7 +94,7 @@ function drawFocus(object) {
 }
 
 function selectObject(event) {
-    var elems = main.repository.Planting()[0].plants.filter(function (elem) { return inCircle({ x: event.offsetX, y: event.offsetY }, elem.pos, radius); });
+    var elems = main.repository.Planting().plants.filter(function (elem) { return inCircle({ x: event.offsetX, y: event.offsetY }, elem.pos, radius); });
     var edges = main.repository.Edges().filter(function (elem) { return distanceToEdge({ x: event.offsetX, y: event.offsetY }, elem) <= radius; });
     var options = $("#selectObject_select").empty();
     $.each(elems, function () {

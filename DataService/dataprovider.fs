@@ -11,6 +11,7 @@ open Microsoft.FSharp.Collections
 open NpgsqlTypes
 
 
+
 [<CLIMutable>]
 // tyyppi kasville
 type Flower = {    ID: int; Name : string;    Color : string; Width : decimal; Height : decimal; StartDate :int; EndDate :int}
@@ -43,6 +44,15 @@ module sqlTest =
           | :? 'T as res -> res
           | _ -> new 'T()
    
+    let pointToString(p : SPoint) : string =
+        sprintf "(%f,%f)" p.X p.Y
+
+    let polygonToString (polygon : SPolygon) : string =
+        sprintf "'(%s)'"(polygon.Points 
+                           |> Seq.map(fun p -> (pointToString p)) 
+                           |> String.concat ","
+                        )
+
     // alustaa tietokantakontekstin
     let ctx = sql.GetDataContext()
    
@@ -59,12 +69,12 @@ module sqlTest =
                 select (    planting.ID,
                             planting.NAME, 
                             planting.plant_plantingid_fkey.Select( fun p -> (p.FLOWERID, castAs<NpgsqlPoint>(p.POSITION))).ToList(),
-                            planting.plantingarea_plantingid_fkey.Select( fun area -> (castAs<NpgsqlPolygon>(area.AREA), area.BORDER)).ToList() )
+                            planting.plantingarea_plantingid_fkey.Select( fun area -> (castAs<NpgsqlPolygon>(area.AREA))).ToList() )
                 } |> Seq.map(fun (a, b, c, d) ->  { Id = a;
                                                     Name = b;
                                                     Owner ="Foo"; // omistajaa ei ole vielä toteutettu joten näin.
                                                     Plants = c.Select(fun (d, e) -> {Flower = d ; Pos = { X = e.X; Y=e.Y}}) |> Seq.toList
-                                                    Area = d.Select (fun (f, g) ->{ Points = f.Select(fun h -> {X = h.X; Y = h.Y}) |> Seq.toList}) |> Seq.toList}) |> Seq.exactlyOne
+                                                    Area = d.Select (fun f ->{ Points = f.Select(fun h -> {X = h.X; Y = h.Y}) |> Seq.toList}) |> Seq.toList}) |> Seq.exactlyOne
     
     // päivittää kukkapenkin muutokset kantaan poistamalla ensin kaikki kukkapenkin tiedot ja tallentamalla sen jälkeen muuttuneet tiedot kantaan
     let update_planting (planting : Planting) =
@@ -79,17 +89,21 @@ module sqlTest =
         let plants = planting.Plants |> Seq.zip (seq {0 .. planting.Plants.Count()-1}) |> Seq.map(fun (n, p) ->
             // Rivit joudutaan viemään kantaan ilman entity mallia koska framework ei oikeastaan tue Postgres kannan kaikkia tietotyyppejä.
             con.Open()
-            let query = sprintf @"INSERT INTO PLANT (plantid, plantingid, flowerid, position) VALUES(%i,%i,%i,%s);" n planting.Id p.Flower (sprintf "'(%f,%f)'" p.Pos.X p.Pos.X)
+            let query = sprintf @"INSERT INTO PLANT (plantid, plantingid, flowerid, position) VALUES(%i,%i,%i,%s);" n planting.Id p.Flower (sprintf "'%s'" (pointToString p.Pos))
             use command = PostgreSQL.createCommand query con 
             command.ExecuteNonQuery() |> ignore
             con.Close()           
             query    ) |> Seq.toList
             
+        con.Open()
+        let areas = planting.Area |> Seq.zip (seq {0 .. planting.Area.Count()-1}) |> Seq.map(fun (n,a) -> 
+            let query = sprintf @"INSERT INTO PLANTINGAREA (plantingid, areaid, area) VALUES(%i,%i,%s);" planting.Id n (polygonToString a)
+            use command = PostgreSQL.createCommand query con
+            command.ExecuteNonQuery() |> ignore
             
-//        let area = planting.Area |> Seq.map( fun pa -> 
-//            let a = ctx.``[PUBLIC].[PLANTINGAREA]``.Create()
-//            a.AREA <- new NpgsqlPolygon(pa.Points.Select(fun p -> new NpgsqlPoint(p.X, p.Y)))) |> Seq.toList
-
+            query   ) |> Seq.toList
+        con.Close()
+        
         ctx.SubmitUpdates()
         
         //TODO: tietojen lisäys

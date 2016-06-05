@@ -3,10 +3,21 @@
     var currentController = {},
         _controllers = controllers,
         _repository = repository,
-        _canvas = canvas;
+        _canvas = canvas,
+            self = {
+            init: function() {
+                $(this).on("closeController", closeController);
+                return this;
+            }
+        };
 
     function activateAddLayer() {
         $(data.addLayer).zIndex(10).toggleClass("hidden");
+    }
+
+    function closeController() {
+        currentController = currentController.close();
+        $(data.addLayer).zIndex(1).toggleClass("hidden");
     }
 
     // Add layer click eventhandler.
@@ -20,22 +31,27 @@
 
     $(data.addFlower).click(function() {
         activateAddLayer();
-        currentController = controllers.plant(_repository, _canvas);
+        currentController = controllers.plant(_repository, _canvas, _repository.findFlower($(controllers.plant.data.selectedFlower).val()));
+    });
+
+    $(data.addLayer).mousemove(function (e) {
+        if (currentController.mousemove) {
+            currentController.mousemove({ x: event.offsetX, y: event.offsetY });
+        }
     });
 
     $(data.addArea).click(function () {
         activateAddLayer();
-        currentController = controllers.edge(_repository, _canvas);
+        currentController = controllers.edge(_repository, _canvas, self);
     });
 
     $(document).keyup(function(e) {
         if (e.keyCode === 27) {
             // TODO: controlled controller shutdown.
-            //currentController = currentController.close();
-            currentController = {};
-            $(data.addLayer).zIndex(1).toggleClass("hidden");
+            closeController();
         }
-    })
-    return {};
+    });
+    
+    return self.init();
 }
 

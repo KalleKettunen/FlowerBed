@@ -104,7 +104,7 @@ function repository(callback) {
                         };
                     }),
                     Area: p.area
-                })
+                });
                 $.ajax({url: 'api/Planting/Save', 
                     data: d,
                     dataType: "json",
