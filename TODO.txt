@@ -5,6 +5,7 @@ dataprovider
 		x kasvit
 		  rajat
 	x apufunktiot pisteen ja polygonin tallentamiseksi
+	uuden planting tallennus.
 
 ui
 	x kasvien reagointi p‰iv‰m‰‰r‰‰n

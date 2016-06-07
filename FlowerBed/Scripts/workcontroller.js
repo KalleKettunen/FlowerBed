@@ -1,9 +1,10 @@
-﻿function workController(controllers, repository, canvas, data) {
+﻿function workController(controllers, repository, canvas, flowerService, data) {
 
     var currentController = {},
         _controllers = controllers,
         _repository = repository,
         _canvas = canvas,
+        _flowerService = flowerService,
             self = {
             init: function() {
                 $(this).on("closeController", closeController);
@@ -31,7 +32,7 @@
 
     $(data.addFlower).click(function() {
         activateAddLayer();
-        currentController = controllers.plant(_repository, _canvas, _repository.findFlower($(controllers.plant.data.selectedFlower).val()));
+        currentController = controllers.plant(_repository, _canvas, _flowerService);
     });
 
     $(data.addLayer).mousemove(function (e) {

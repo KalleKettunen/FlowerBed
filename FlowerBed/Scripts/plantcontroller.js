@@ -1,18 +1,19 @@
-﻿function plantController(repository, canvas, flower) {
+﻿function plantController(repository, canvas, flowerService) {
     var _repository = repository,
         _canvas = canvas,
-        _flower = flower;
+        _flowerService = flowerService;
 
     return {
         "click" : function(pos) {
             var plant = {
-                flower: _flower,
+                flower: _flowerService.selectedFlower(),
                 pos: pos
             };
             main.repository.addPlant(plant);
         },
-        "mousemove": function(pos) {
-            _canvas.drawCircle(pos, _flower.width, _flower.color);
+        "mousemove": function (pos) {
+            var flower = _flowerService.selectedFlower();
+            _canvas.drawCircle(pos, flower.width, flower.color);
             _canvas.update();
         },
         "close" : function() {

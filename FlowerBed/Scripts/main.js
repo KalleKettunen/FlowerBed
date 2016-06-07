@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     main.geometryService = geometryService();
     main.repository = repository();
+    main.flowerService = flowerService(main.repository, { "selectedFlower": "#selectFlower option:selected" });
     main.zoom = zoomController({ "zoomIn": "#zoom_in", "zoomOut": "#zoom_out", "scale": "#scale" });
     main.canvas = flowerCanvas(document.getElementById("flowerbed").getContext("2d"), main.zoom,  { "update": ["#zoom_in", "#zoom_out"] });
     main.date = dateController({"date" : "#date", "dateControl" : "#date_slider", "update" :main.canvas });
@@ -33,7 +34,7 @@ $(document).ready(function() {
             "geometry": main.geometryService
     };
             plantController.data = {
-                "selectedFlower": "#selectFlower option:selected"
+                
             };
         main.workController = workController(
             {
@@ -42,6 +43,7 @@ $(document).ready(function() {
             },
             main.repository,
             main.canvas,
+            main.flowerService,
             {
                 "addLayer": "#add_layer",
                 "addFlower": "#add_flower",
