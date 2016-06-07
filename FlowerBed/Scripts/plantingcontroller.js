@@ -10,15 +10,18 @@
                 canvas.init({ "planting": planting, "date": main.date });
                 canvas.update();
             });
+            $(data.dialog).dialog("close");
         },
         save: function() {
             return repository.db.savePlanting();
         },
         create: function () {
-            var planting = { area: [], plants: [] };
+            var planting = {name: $(data.planting).val(), area: [], plants: [] };
             repository.Planting(planting);
+            processPlanting(planting);
             canvas.init({ "planting": planting, "date": main.date });
             canvas.update();
+            $(data.dialog).dialog("close");
         }
 
     };

@@ -4,12 +4,13 @@ dataprovider
 	  kasvimaan tallentaminen tietokantaan
 		x kasvit
 		  rajat
-	 apufunktiot pisteen ja polygonin tallentamiseksi
+	x apufunktiot pisteen ja polygonin tallentamiseksi
 
 ui
 	x kasvien reagointi p‰iv‰m‰‰r‰‰n
 	x kasvin lis‰‰minen tietokantaan.
-	n‰yt‰ kasvin ulkorajat lis‰tt‰ess‰ sit‰ kasvimaalle.
+	x n‰yt‰ kasvin ulkorajat lis‰tt‰ess‰ sit‰ kasvimaalle.
+	x kasvi ei vaihdu valinnasta
 	x kukkien hallinta dialogi
 	  x	lis‰ys
 		editointi
@@ -21,8 +22,11 @@ ui
 	geometriapalvelu
 	
 	aloitus dialogi
-		mahdollista avata dialogi muutenkin.
-		load sulkee dialogin viestin kanssa.
+		x mahdollista avata dialogi muutenkin.
+		x load sulkee dialogin viestin kanssa.
+			viesti
+		x create sulkee dialogin
+		viljelm‰n nimi dialogista malliin.
 		
 	Canvas
 		x p‰ivit‰ myˆs alueet.
@@ -34,4 +38,5 @@ data
 	 x kukinta alku ja loppu
 
 bugs
-	plants undefined in selectObject
+	x plants undefined in selectObject
+		ei dialogia, jos ei mit‰‰n valittavaa

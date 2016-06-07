@@ -1,5 +1,5 @@
 function repository(callback) {
-    var _planting = [],
+    var _planting = { name:"", area: [], plants: [] },
         _edges = [],
         _flowers = [],
         _objectid = 0,

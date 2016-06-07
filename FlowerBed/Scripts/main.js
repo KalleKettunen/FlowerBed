@@ -25,7 +25,8 @@ $(document).ready(function() {
                 "name": "#canvasName",
                 "save": "#savePlanting",
                 "open": "#openPlantingController",
-                "create": "#createPlanting"
+                "create": "#createPlanting",
+                "planting": "#plantingName"
             });
         edgeController.data = {
             "addLayer": "#add_layer",
