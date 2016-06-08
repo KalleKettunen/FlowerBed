@@ -22,7 +22,7 @@ type SPoint = {    X : float32;    Y : float32}
 
 [<CLIMutable>]
 // tyyppi kasvimaassa olevalle kasville
-type SPlant = {    Flower : int;    Pos : SPoint}
+type SPlant = {    Flower : Flower;    Pos : SPoint}
 
 [<CLIMutable>]
 // kasvimaan rajat listana pisteitä.
@@ -57,7 +57,7 @@ module sqlTest =
     let ctx = sql.GetDataContext()
    
     // hakee kaikki viljelykset tietokannasta.
-    let plantings =
+    let plantings ()=
         query { for planting in ctx.``[PUBLIC].[PLANTING]`` do
                 select ({Id=planting.ID;Name=planting.NAME})
         } |> Seq.toList
@@ -68,16 +68,17 @@ module sqlTest =
                 where (planting.ID = id)
                 select (    planting.ID,
                             planting.NAME, 
-                            planting.plant_plantingid_fkey.Select( fun p -> (p.FLOWERID, castAs<NpgsqlPoint>(p.POSITION))).ToList(),
+                            planting.plant_plantingid_fkey.Select( fun p -> (p.plant_flowerid_fkey.Single(), castAs<NpgsqlPoint>(p.POSITION))).ToList(),
                             planting.plantingarea_plantingid_fkey.Select( fun area -> (castAs<NpgsqlPolygon>(area.AREA))).ToList() )
                 } |> Seq.map(fun (a, b, c, d) ->  { Id = a;
                                                     Name = b;
                                                     Owner ="Foo"; // omistajaa ei ole vielä toteutettu joten näin.
-                                                    Plants = c.Select(fun (d, e) -> {Flower = d ; Pos = { X = e.X; Y=e.Y}}) |> Seq.toList
+                                                    Plants = c.Select(fun (d, e) -> {Flower = {ID=d.ID;Name=d.NAME;Color=d.COLOR;Width=d.WIDTH;Height=d.HEIGHT;StartDate=d.flowerstate_flower_fkey.Single().STARTDATE;EndDate=d.flowerstate_flower_fkey.Single().ENDDATE} ; Pos = { X = e.X; Y=e.Y}}) |> Seq.toList
                                                     Area = d.Select (fun f ->{ Points = f.Select(fun h -> {X = h.X; Y = h.Y}) |> Seq.toList}) |> Seq.toList}) |> Seq.exactlyOne
-    
+
     // päivittää kukkapenkin muutokset kantaan poistamalla ensin kaikki kukkapenkin tiedot ja tallentamalla sen jälkeen muuttuneet tiedot kantaan
-    let update_planting (planting : Planting) =
+    let updatePlanting (planting : Planting) =
+
         let con = PostgreSQL.createConnection ctx.Functions.ConnectionString
         con.Open()
         let query = sprintf @"DELETE FROM PLANT WHERE PLANTINGID = %i; DELETE FROM PLANTINGAREA WHERE PLANTINGID = %i;" planting.Id planting.Id
@@ -89,7 +90,7 @@ module sqlTest =
         let plants = planting.Plants |> Seq.zip (seq {0 .. planting.Plants.Count()-1}) |> Seq.map(fun (n, p) ->
             // Rivit joudutaan viemään kantaan ilman entity mallia koska framework ei oikeastaan tue Postgres kannan kaikkia tietotyyppejä.
             con.Open()
-            let query = sprintf @"INSERT INTO PLANT (plantid, plantingid, flowerid, position) VALUES(%i,%i,%i,%s);" n planting.Id p.Flower (sprintf "'%s'" (pointToString p.Pos))
+            let query = sprintf @"INSERT INTO PLANT (plantid, plantingid, flowerid, position) VALUES(%i,%i,%i,%s);" n planting.Id p.Flower.ID (sprintf "'%s'" (pointToString p.Pos))
             use command = PostgreSQL.createCommand query con 
             command.ExecuteNonQuery() |> ignore
             con.Close()           
@@ -109,6 +110,18 @@ module sqlTest =
         //TODO: tietojen lisäys
 
         true
+    
+    let createPlanting (planting : Planting) =
+        let planting' = ctx.``[PUBLIC].[PLANTING]``.Create()
+        planting'.NAME <- planting.Name
+        ctx.SubmitUpdates()
+
+        planting'.ID
+
+    let savePlanting (planting : Planting) =
+        match plantings() |> Seq.map(fun p -> p.Id) |> Seq.exists(fun id -> id =planting.Id) with
+            | false -> updatePlanting({Id=createPlanting(planting);Name=planting.Name; Owner=planting.Owner; Plants = planting.Plants; Area=planting.Area})
+            | true -> updatePlanting(planting)
 
     // Hakee kaikki erillaiset kukkaset kukkatietokannasta
     let flowers ()=
@@ -164,4 +177,4 @@ module sqlTest =
         
         // tallenetaan muutokset.
         ctx.SubmitUpdates()
-        
+   

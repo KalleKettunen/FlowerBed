@@ -20,12 +20,12 @@ type PlantingController() =
     // Get Ids and names of all plantings
     [<Route("api/planting/")>]
     member x.Get() : PlantingData list =
-        DataService.sqlTest.plantings
+        DataService.sqlTest.plantings()
     
     [<Route("api/planting/Save")>]
     member x.Save(planting : DataService.Planting)  =
         
-        x.Ok(DataService.sqlTest.update_planting planting)
+        x.Ok(DataService.sqlTest.savePlanting planting)
         
     [<Route("api/planting/Test")>]
     member x.Save(plant : DataService.SPlant)  =

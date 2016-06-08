@@ -20,6 +20,7 @@ ui
 	rajojen piirt‰minen
 		x uusien lis‰‰minen
 		vanhojen muokkaus
+		zoomatessa viiva ja kursori eiv‰t kohtaa
 	geometriapalvelu
 	
 	aloitus dialogi
