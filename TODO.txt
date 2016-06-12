@@ -3,9 +3,9 @@ dataprovider
 	x kasvin lis‰‰minen tietokantaan.
 	  kasvimaan tallentaminen tietokantaan
 		x kasvit
-		  rajat
+		x rajat
 	x apufunktiot pisteen ja polygonin tallentamiseksi
-	uuden planting tallennus.
+	x uuden planting tallennus.
 
 ui
 	x kasvien reagointi p‰iv‰m‰‰r‰‰n
@@ -20,7 +20,7 @@ ui
 	rajojen piirt‰minen
 		x uusien lis‰‰minen
 		vanhojen muokkaus
-		zoomatessa viiva ja kursori eiv‰t kohtaa
+		x zoomatessa viiva ja kursori eiv‰t kohtaa
 	geometriapalvelu
 	
 	aloitus dialogi

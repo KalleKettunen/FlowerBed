@@ -1,10 +1,11 @@
-﻿function edgeController(repository, canvas, parent) {
+﻿function edgeController(repository, canvas, parent, zoom) {
     var _repository = repository,
         _canvas = canvas,
         _path = [],
         _point = {},
         _geometry = edgeController.data.geometry,
-            _parent = parent;
+        _parent = parent,
+        _zoom = zoom;
 
     function edge(pos) {
         return { "start": _point, "end": pos };
@@ -19,7 +20,7 @@
         _point = pos;
         addEdge(pos);
         $(edgeController.data.addLayer).mousemove(function (e) {
-            var mousePos = { 'x': e.offsetX, 'y': e.offsetY };
+            var mousePos = { 'x': e.offsetX / _zoom.scale(1), 'y': e.offsetY / _zoom.scale(1) };
             _canvas.drawPath(_path);
             
             if (_geometry.sqrDistance(_path[0], mousePos) < 30) {

@@ -44,6 +44,7 @@ $(document).ready(function() {
             main.repository,
             main.canvas,
             main.flowerService,
+            main.zoom,
             {
                 "addLayer": "#add_layer",
                 "addFlower": "#add_flower",
