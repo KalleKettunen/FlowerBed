@@ -101,13 +101,15 @@ function selectObject(event) {
     var elems = main.repository.Planting().plants.filter(function (elem) { return inCircle({ x: event.offsetX, y: event.offsetY }, elem.pos, radius); });
     var edges = main.repository.Edges().filter(function (elem) { return distanceToEdge({ x: event.offsetX, y: event.offsetY }, elem) <= radius; });
     var options = $("#selectObject_select").empty();
-    $.each(elems, function () {
-        options.append(new Option(this.Name(), this.id));
-    });
-    $.each(edges, function () {
-        options.append(new Option(this.Name(), this.id));
-    });
-    $("#selectObject").dialog();
+    if (elems.length !== 0 || edges.length !== 0) {
+        $.each(elems, function() {
+            options.append(new Option(this.Name(), this.id));
+        });
+        $.each(edges, function() {
+            options.append(new Option(this.Name(), this.id));
+        });
+        $("#selectObject").dialog();
+    }
 };
 
 function inCircle(pos, center, radius) {

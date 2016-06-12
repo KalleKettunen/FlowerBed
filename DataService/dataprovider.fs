@@ -11,6 +11,7 @@ open Microsoft.FSharp.Collections
 open NpgsqlTypes
 
 
+
 [<CLIMutable>]
 // tyyppi kasville
 type Flower = {    ID: int; Name : string;    Color : string; Width : decimal; Height : decimal; StartDate :int; EndDate :int}
