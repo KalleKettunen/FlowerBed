@@ -120,11 +120,6 @@
     <Compile Include="AssemblyInfo.fs" />
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
-    <Compile Include="Models\Flowers.fs" />
-    <Compile Include="Models\Point.fs" />
-    <Compile Include="Models\Plant.fs" />
-    <Compile Include="Models\Polygon.fs" />
-    <Compile Include="Models\Planting.fs" />
     <Compile Include="Controllers\PlantingController.fs" />
     <Compile Include="Controllers\FlowersController.fs" />
     <Compile Include="Controllers\FT.fs" />
@@ -217,6 +212,11 @@
     <ProjectReference Include="..\DataService\DataService.fsproj">
       <Name>DataService</Name>
       <Project>{834b9710-b030-4239-9aa8-c66f4073df9a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\FlowerBed.Domain\FlowerBed.Domain.fsproj">
+      <Name>FlowerBed.Domain</Name>
+      <Project>{581891dd-0221-4469-8589-af9bc7854fbb}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

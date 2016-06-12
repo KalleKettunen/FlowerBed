@@ -4,7 +4,7 @@ open System.Collections.Generic
 open System.Linq
 open System.Net.Http
 open System.Web.Http
-open FlowerBed.Models
+open FlowerBed.Domain
 open DataService
 
 [<CLIMutable>]

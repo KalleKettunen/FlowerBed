@@ -87,6 +87,11 @@
       <Project>{834b9710-b030-4239-9aa8-c66f4073df9a}</Project>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\FlowerBed.Domain\FlowerBed.Domain.fsproj">
+      <Name>FlowerBed.Domain</Name>
+      <Project>{581891dd-0221-4469-8589-af9bc7854fbb}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

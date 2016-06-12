@@ -96,7 +96,7 @@ function repository(callback) {
                     Owner: p.owner,
                     Plants: p.plants.map(function(plant) {
                         return {
-                            Flower: plant.flower.id,
+                            Flower: plant.flower,
                             Pos: {
                                 X: plant.pos.x,
                                 Y: plant.pos.y

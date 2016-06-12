@@ -5,13 +5,13 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>834b9710-b030-4239-9aa8-c66f4073df9a</ProjectGuid>
+    <ProjectGuid>581891dd-0221-4469-8589-af9bc7854fbb</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>DataService</RootNamespace>
-    <AssemblyName>DataService</AssemblyName>
+    <RootNamespace>FlowerBed.Domain</RootNamespace>
+    <AssemblyName>FlowerBed.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
-    <Name>DataService</Name>
+    <Name>FlowerBed.Domain</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +21,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\DataService.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\FlowerBed.Domain.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,41 +30,20 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\DataService.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\FlowerBed.Domain.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FSharp.Data.SqlProvider">
-      <HintPath>..\..\..\..\..\Documents\Vastaanotetut tiedostot\SQLProvider-4a908255bfad899a1d4930894588d367d2cb2469\src\SQLProvider\obj\Release\FSharp.Data.SqlProvider.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Security">
-      <HintPath>..\..\..\..\..\..\..\Apps\Npgsql2.0.12.0-bin-ms.net4.0\Mono.Security.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="policy.2.0.Npgsql">
-      <HintPath>..\..\..\..\..\..\..\Apps\Npgsql2.0.12.0-bin-ms.net4.0\policy.2.0.Npgsql.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dataprovider.fs" />
+    <Compile Include="Models.fs" />
     <None Include="Script.fsx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FlowerBed.Domain\FlowerBed.Domain.fsproj">
-      <Name>FlowerBed.Domain</Name>
-      <Project>{581891dd-0221-4469-8589-af9bc7854fbb}</Project>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

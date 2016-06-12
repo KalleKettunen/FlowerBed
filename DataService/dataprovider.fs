@@ -9,31 +9,9 @@ open FSharp.Data.Sql.Common
 open FSharp.Data.Sql.Providers
 open Microsoft.FSharp.Collections
 open NpgsqlTypes
+open FlowerBed.Domain
 
 
-
-[<CLIMutable>]
-// tyyppi kasville
-type Flower = {    ID: int; Name : string;    Color : string; Width : decimal; Height : decimal; StartDate :int; EndDate :int}
-
-[<CLIMutable>]
-// tyyppi pisteelle
-type SPoint = {    X : float32;    Y : float32}
-
-[<CLIMutable>]
-// tyyppi kasvimaassa olevalle kasville
-type SPlant = {    Flower : Flower;    Pos : SPoint}
-
-[<CLIMutable>]
-// kasvimaan rajat listana pisteitä.
-type SPolygon = {   Points : SPoint list}
-
-[<CLIMutable>]
-// tyyppi kasvimaalle
-type Planting = {Id :int;Name :string; Owner :string; Plants: SPlant list; Area : SPolygon list}
-
-// tyyppi kasvimaan lisädatalle
-type PlantingData = {Id: int; Name :string}
 
 // tietokanta rajapinta
 module sqlTest =
@@ -44,10 +22,10 @@ module sqlTest =
           | :? 'T as res -> res
           | _ -> new 'T()
    
-    let pointToString(p : SPoint) : string =
+    let pointToString(p : Point) : string =
         sprintf "(%f,%f)" p.X p.Y
 
-    let polygonToString (polygon : SPolygon) : string =
+    let polygonToString (polygon : Polygon) : string =
         sprintf "'(%s)'"(polygon.Points 
                            |> Seq.map(fun p -> (pointToString p)) 
                            |> String.concat ","
