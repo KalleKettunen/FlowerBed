@@ -10,15 +10,6 @@ open FSharp.Data.Sql.Providers
 open Microsoft.FSharp.Collections
 open NpgsqlTypes
 
-//type sql = SqlDataProvider<
-//                ConnectionString = @"Server=kalletest.cloudapp.net;Port=54321;Database=FlowerBed;User Id=postgres;Password=0iv4P0ika",
-//                DatabaseVendor = Common.DatabaseProviderTypes.POSTGRESQL, 
-//                ResolutionPath = @"D:\home\site\wwwroot\bin\">
-                
-type sql = SqlDataProvider<
-                ConnectionString = @"Server=localhost;Port=5432;Database=FlowerBed;User Id=kalle;Password=1n<<uP1n<<u",
-                DatabaseVendor = Common.DatabaseProviderTypes.POSTGRESQL, 
-                ResolutionPath = @"D:\home\site\wwwroot\bin\">
 
 [<CLIMutable>]
 // tyyppi kasville
