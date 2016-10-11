@@ -28,18 +28,24 @@ $(document).ready(function() {
                 "open": "#openPlantingController",
                 "create": "#createPlanting",
                 "planting": "#plantingName"
-            });
+            }
+        );
         edgeController.data = {
             "addLayer": "#add_layer",
             "geometry": main.geometryService
-    };
-            plantController.data = {
+        };
+        plantController.data = {
                 
-            };
+        };
+        editAreaController.data = {
+            "addLayer": "#add_layer",
+            "geometry": main.geometryService
+        };
         main.workController = workController(
             {
                 "edge" : edgeController,
-                "plant": plantController
+                "plant": plantController,
+                "editArea": editAreaController
             },
             main.repository,
             main.canvas,

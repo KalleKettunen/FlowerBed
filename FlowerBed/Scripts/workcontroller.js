@@ -47,6 +47,11 @@
         currentController = controllers.edge(_repository, _canvas, self, _zoom);
     });
 
+    $(data.editArea).click(function () {
+        activateAddLayer();
+        currentController = controllers.editArea(_repository, _canvas, self, _zoom);
+    });
+
     $(document).keyup(function(e) {
         if (e.keyCode === 27) {
             // TODO: controlled controller shutdown.

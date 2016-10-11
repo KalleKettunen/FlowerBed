@@ -20,6 +20,7 @@ ui
 	rajojen piirtäminen
 		x uusien lisääminen
 		vanhojen muokkaus
+		pisteiden poistaminen
 		x zoomatessa viiva ja kursori eivät kohtaa
 	geometriapalvelu
 	
@@ -29,6 +30,7 @@ ui
 			viesti
 		x create sulkee dialogin
 		viljelmän nimi dialogista malliin.
+		alussa tyhjä pohja, jos mitään ei valittuna.
 		
 	Canvas
 		x päivitä myös alueet.
