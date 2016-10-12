@@ -161,6 +161,7 @@
     <Content Include="Scripts\Services\geometryservice.js" />
     <Content Include="Scripts\Services\flowerservice.js" />
     <Content Include="Scripts\editareacontroller.js" />
+    <Content Include="Scripts\deleteareacontroller.js" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.Data.SqlProvider">

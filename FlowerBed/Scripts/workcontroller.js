@@ -52,6 +52,11 @@
         currentController = controllers.editArea(_repository, _canvas, self, _zoom);
     });
 
+    $(data.deleteArea).click(function () {
+        activateAddLayer();
+        currentController = controllers.deleteArea(_repository, _canvas, self, _zoom);
+    });
+
     $(document).keyup(function(e) {
         if (e.keyCode === 27) {
             // TODO: controlled controller shutdown.

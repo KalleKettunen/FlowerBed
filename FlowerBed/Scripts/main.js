@@ -45,7 +45,8 @@ $(document).ready(function() {
             {
                 "edge" : edgeController,
                 "plant": plantController,
-                "editArea": editAreaController
+                "editArea": editAreaController,
+                "deleteArea" :deleteAreaController
             },
             main.repository,
             main.canvas,
